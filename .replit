@@ -1,2 +1,2 @@
 language = "csharp"
-run = "set -e; csc Main.cs genero.cs livro.cs autor.cs ngenero.cs nlivro.cs nautor.cs; mono Main.exe"
+run = "set -e; csc Main.cs genero.cs livro.cs autor.cs ngenero.cs nlivro.cs nautor.cs cliente.cs ncliente.cs; mono Main.exe"

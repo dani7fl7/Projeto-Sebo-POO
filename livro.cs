@@ -66,11 +66,11 @@ class Livro {
 
   public override string ToString() {
     if (genero == null)
-      return id + " - " + descricao + " - estoque: " + quantidade + " - preço: " + preco.ToString("0.00") + " - " + autor.GetDescricao();
+      return id + " - " + descricao + " - Estoque: " + quantidade + " - Preço: " + preco.ToString("0.00") + " - " + autor.GetDescricao();
     if (autor == null)
-      return id + " - " + descricao + " - estoque: " + quantidade + " - preço: " + preco.ToString("0.00") + " - " + genero.GetDescricao();
+      return id + " - " + descricao + " - Estoque: " + quantidade + " - Preço: " + preco.ToString("0.00") + " - " + genero.GetDescricao();
     else  
-      return id + " - " + descricao + " - estoque: " + quantidade + " - preço: " + preco.ToString("0.00") + " - " + genero.GetDescricao() + " - " + autor.GetDescricao();   
+      return id + " - " + descricao + " - Estoque: " + quantidade + " - Preço: " + preco.ToString("0.00") + " - " + autor.GetDescricao() + " - " + genero.GetDescricao();   
   }
 
 
