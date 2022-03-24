@@ -1,7 +1,6 @@
 using System;
 
-class Cliente : IComparable<Cliente> {
-  // Propriedade do Cliente
+public class Cliente : IComparable<Cliente> {
   public int Id { get; set; }
   public string Nome { get; set; }
   public DateTime Nascimento { get; set; }

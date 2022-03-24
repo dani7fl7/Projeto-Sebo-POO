@@ -1,19 +1,43 @@
 using System;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
+using System.Linq;
+
 
 class NGenero {
+  private NGenero() {}
+  static NGenero obj = new NGenero();
+  public static NGenero Singleton { get => obj; }
+    
   private Genero[] generos = new Genero[10];
   private int ng;
 
+
+  public void Abrir() {
+    Arquivo<Genero[]> f = new Arquivo<Genero[]>();
+    generos = f.Abrir("./generos.xml");
+    ng = generos.Length;
+  }
+
+  public void Salvar() {
+    Arquivo<Genero[]> f = new Arquivo<Genero[]>();
+    f.Salvar("./generos.xml", Listar());
+  }
+  
+
   public Genero[] Listar() {
-    Genero[] g = new Genero[ng];
-    Array.Copy(generos, g, ng);
-    return g;
+    return 
+      generos.Take(ng).OrderBy(obj => obj.GetDescricao()).ToArray();
   }
 
   public Genero Listar(int id) {
-    for (int i = 0; i < ng; i++)
+    /*for (int i = 0; i < ng; i++)
       if (generos[i].GetId() == id) return generos[i];
-    return null;  
+    return null;  */
+    var r = generos.Where(obj => obj.GetId() == id);
+    if (r.Count() == 0) return null;
+    return r.First();
   }
 
   public void Inserir(Genero g) {
@@ -25,10 +49,8 @@ class NGenero {
   } 
 
   public void Atualizar(Genero g) {
-    // Localizar no vetor o genero que possui o id informado no parametro Genero
     Genero g_atual = Listar(g.GetId());
     if (g_atual == null) return;
-    // Alterar os dados do genero
     g_atual.SetDescricao(g.GetDescricao());
   } 
 
@@ -39,13 +61,11 @@ class NGenero {
   }
 
   public void Excluir(Genero g) {
-    // Verifica se o genero está cadastrada
     int n = Indice(g);
     if (n == -1) return;
     for (int i = n; i < ng - 1; i++)
       generos[i] = generos[i + 1];
     ng--;
-    // Recuperar a lista de livros do genero
     Livro[] ls = g.LivroListar();
     foreach(Livro l in ls) l.SetGenero(null); 
   } 
